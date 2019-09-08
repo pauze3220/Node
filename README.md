@@ -8,12 +8,12 @@ npm install --save @nodert-win10-rs3/windows.ui.notifications
 | SDK | Known As | Windows Version | npm Scope |
 | --- | --- | --- | --- |
 | Windows 10, Build 17134 | April 2018 Update (Redstone 4) | 1803 | [npmjs.com/org/nodert-win10-rs4](https://www.npmjs.com/org/nodert-win10-rs4) |
-| Windows 10, Build 16299 | Fall Creators Update (Redstone 3) | 1709 |  [npmjs.com/org/nodert-win10-rs3](https://www.npmjs.com/org/nodert-win10-rs3) |
-| Windows 10, Build 15063 | Creators Update (Redstone 2) | 1703 | [npmjs.com/org/nodert-win10-cu](https://www.npmjs.com/org/nodert-win10-cu) |
-| Windows 10, Build 14393 | Anniversary Update (Redstone 1) | 1607 | [npmjs.com/org/nodert-win10-au](https://www.npmjs.com/org/nodert-win10-au) |
+| Windows 10, Build 16299 | Fall Creators Update (Redstone 3) | 1709 |  [npmjs.com/org/noden10-rs3](https://www.npmjs.com/org/nodert-win10-rs3) |
+| Windows 10, Build 15063 | Creators Update (Redstone 2) | 1703 | [npmjs.com/org/10-cu](https://www.npmjs.com/org/nodert-win10-cu) |
+| Windows 10, Build 14393 | Anniversary Update (Redstone 1) | 1607 | [rg/nodert-win10-au](https://www.npmjs.com/org/nodert-win10-au) |
 | Windows 10, Build 10586 | Threshold 2 | 1511 | [npmjs.com/~nodert-win10](https://www.npmjs.com/~nodert-win10) |
 
-For an in-depth overview, [check out our `//build` talk][talk].
+For an in-depth overview, [check out our `//buildk][talk].
 
 In general, any WinRT/UWP API that can be called by a desktop app can by called by
 Node.js or Electron using NodeRT. There are notable exceptions, but UWP APIs
@@ -49,9 +49,9 @@ As an example, let's check out the `Windows.Devices.Geolocation` namespace to
 locate the user from Node.js.
 
 :one: First, ensure that you have the Windows 10 SDK installed. In this example,
-we're using the [Fall Creators Update SDK][sdk-archive].
+we're using the [Fall Creators Update SDK]].
 :two: Then, install `@nodert-win10-rs3/windows.devices.geolocation`. The npm
-organization denotes the used SDK version - in this case, it's the Fall Creators
+organization denotes the used SDK version e, it's the Fall Creators
 Update, which has the codename "Redstone 3".
 
 ```sh
@@ -63,10 +63,10 @@ features. In this example, we're creating a new `Geolocator` and are calling
 its instance method [`getGeopositionAsync()`][getgeopositionasync].
 
 ```js
-const { Geolocator } = require('windows.devices.geolocation')
+const { Geolocator } = reqevices.geolocation')
 const locator = new Geolocator()
 
-locator.getGeopositionAsync((error, result) => {
+locator.getGeoc((error, result) => {
   if (error) {
     console.error(error)
     return
@@ -84,7 +84,7 @@ Let's take a closer look at the whole module:
 ![Windows.Devices.Geolocation NodeRT module contents](/doc/images/object_contents.png)
 
 As you can see, you can create new WinRT objects using the `new` operator. In
-order to inspect the method and properties of the object, you can inspect
+order to inspect the method and properties of the object, can inspect
 its prototype. For example, a new `Geolocator` object looks like this:
 
 ```javascript
@@ -127,7 +127,7 @@ right set of arguments and the correct overload of the method will be
 called:
 
 ```js
-const { XmlDocument }  = require('windows.data.xml.dom')
+const { XmlDocument }  = require('windo.xml.dom')
 
 const xmlDoc = new xml.XmlDocument();
 xmlDoc.loadXml('<node>some text here</node>')
@@ -177,18 +177,15 @@ Unregistering from an event is done the same way, using the class's `off` or
 
 ```js
 // Using same event handler as in the example above
-locator.off('statusChanged', handler);
+locator.off('statu
 ```
 
-### Namespaces
-
+### Name
 Each NodeRT module represents a single namespace. For instance, `windows.storage`
-is its own NodeRT module - and `windows.storage.streams` is another NodeRT module.
-
+is its own NodeRT module - and `windows.storage.streams` is anoth
 The reason for this separation is strictly due to performance considerations.
 Separating the code allows you to load only the code you actually intend to
-use, meaning that Node.js won't fill the machine's memory.
-
+use, meaning that Node.js won't fill the mach
 This architecture means that in case you are using a NodeRT module which
 contains a function, property, or event which returns an object from another
 namespace, then you will need to require that namespace **before** calling
